@@ -1,0 +1,31 @@
+import turtle
+alex = turtle.Turtle()
+alex.shape("turtle")
+wn = turtle.Screen()
+wn.bgcolor("white")
+alex.color("green")
+alex.pensize(3)
+alex.penup()
+alex.left(90)
+alex.forward(75)
+alex.left(90)
+alex.forward(75)
+alex.left(180)
+alex.pendown()
+for o in range(3):
+    for i in range(3):
+        for j in range(4):
+            alex.pendown()
+            alex.forward(50)
+            alex.right(90)
+        alex.penup()
+        alex.forward(50)
+        alex.pendown()
+    alex.penup()
+    alex.right(90)
+    alex.forward(50)
+    alex.right(90)
+    alex.forward(150)
+    alex.right(180)
+    alex.pendown
+wn.exitonclick()
