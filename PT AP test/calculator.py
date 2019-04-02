@@ -3,60 +3,118 @@ from tkinter import *
 calc = Tk()
 counter = 0
 
-calc.geometry("375x570")
+calc.geometry("375x450")
 calc.title("Calculator")
 
 
-equation = StringVar()
+equation = ''
 
 
-e = Entry(calc, textvariable=equation, state='disabled', width=11, font="Helvetica 44 bold", justify="center", bg="#1E6FBA",fg="yellow", disabledbackground="#1E6FBA", disabledforeground="yellow", highlightbackground="black", highlightcolor="red", highlightthickness=1, bd=0)
-e.configure(disabledbackground="white", disabledforeground="black")
-#e.grid(columnspan=4, ipadx=70)
-e.grid(row=0, column=0, columnspan=4, padx=4, pady=5)
-#e.configure(state='normal')
+ent = Entry(calc, textvariable=equation, state='disabled', width=11, font="Helvetica 44 bold", justify="center", bg="#1E6FBA",fg="yellow", disabledbackground="#1E6FBA", disabledforeground="yellow", highlightbackground="black", highlightcolor="red", highlightthickness=1, bd=0)
+ent.configure(disabledbackground="white", disabledforeground="black")
+#ent.grid(columnspan=4, ipadx=70)
+ent.grid(row=0, column=0, columnspan=4, padx=4, pady=5)
+#ent.configure(state='normal')
 
 
-def createButton(val, write=True, width=7):
-    return Button(calc, text=val, command=print(2), width=width)
+def createButton(val, write=True, width=10):
+    return Button(calc, text=val, command=lambda: click(val, write), width=width, height=3, font=('Helvetica', '10'))
 #test
-b1 = createButton(7)
-b2 = createButton(8)
-b3 = createButton(9)
-b4 = createButton(u"\u0040", None)
-b5 = createButton(4)
-b6 = createButton(5)
-b7 = createButton(6)
+b1 = createButton("%")
+b2 = createButton(u"\u221A", None)
+b3 = createButton("x²")
+b4 = createButton(u"\u00B9" + u"\u2044" + u"\u2093", None)
+b5 = createButton("CE")
+b6 = createButton("C")
+b7 = createButton(u"\u232B", None)
 b8 = createButton(u"\u00F7")
-b9 = createButton(1)
-b10 = createButton(2)
-b11 = createButton(3)
-b12 = createButton('*')
-b13 = createButton('.')
-b14 = createButton(0)
-b15 = createButton('+')
+b9 = createButton(7)
+b10 = createButton(8)
+b11 = createButton(9)
+b12 = createButton(u"\u2715")
+b13 = createButton(4)
+b14 = createButton(5)
+b15 = createButton(6)
 b16 = createButton('-')
-b17 = createButton('=', None, 34)
+b17 = createButton(1)
+b18 = createButton(2)
+b19 = createButton(3)
+b20 = createButton('+')
+b21 = createButton(u"\u00B1")
+b22 = createButton(0)
+b23 = createButton('.')
+b24 = createButton('=', None)
 
-"""symbols
-https://en.wikipedia.org/wiki/List_of_Unicode_characters
+#symbols
+#https://en.wikipedia.org/wiki/List_of_Unicode_characters
 
 
-"""
 
-buttons = [b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17]
+
+buttons = [b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b23, b24 ]
 
 count = 0
-for row in range(1, 5):
+for row in range(1, 7):
     for column in range(4):
         buttons[count].grid(row=row, column=column)
         count += 1
-buttons[16].grid(row=5, column=0, columnspan=4)
 
 
-e = equation.get()
+def click(text, write):
+    global equation
+    if write is None:
+        if text == '=' and equation:
+            equation = re.sub(u"\u00F7", '/', equation)
+            equation = re.sub(u"\u2715", '*', equation)
+            answer = str(eval(equation))
+            clear_screen()
+            print(equation.get())
+            insert_screen(answer)
+        elif text == u"\u232B":
+            clear_screen()
+    else:
+        insert_screen(text)
+
+
+def clear_screen():
+    global equation
+    global ent
+    equation = ''
+    ent.configure(state='normal')
+    ent.delete('1.0', END)
+
+
+def insert_screen(value):
+    global ent
+    global equation
+    #ent.configure(state='normal')
+    ent.insert(END, value)
+    equation = str(value)
+    ent = equation.get()
+    ent.configure(state='disabled')
 calc.mainloop()
+
+
+
+
+
+
+
+
+
+
 """
+
+
+
+
+
+
+
+
+
+
+
 from tkinter import *
 
 
@@ -150,4 +208,5 @@ class Calculator:
 
 root = Tk()
 my_gui = Calculator(root)
-root.mainloop()"""
+root.mainloop()
+"""
