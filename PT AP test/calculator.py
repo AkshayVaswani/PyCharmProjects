@@ -90,7 +90,7 @@ def islastnum(text, clearorna):
         if text != '=' and text != u"\u00B1":
             lastnumber = 0
             print("last" + str(lastnumber))
-
+#test
 def multiplybyneg():
     global lastnumber
     lastnumber *= (-1)
