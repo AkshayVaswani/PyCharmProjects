@@ -132,7 +132,7 @@ def deletelast():
     global equation
     global lastnumber
     equation = equation[:-1]
-    print("del E: " + equation)  # ERROR, NOT DELETING '.' FROM EQUATION
+    print("del E: " + equation)
     lastnumber = lastnumber // 10  # trying to remove the last number from the lastnumber variable so I can accuratly turn it negative
     print("del"+str(lastnumber))
     refresh_screen()
