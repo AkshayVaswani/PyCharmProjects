@@ -85,23 +85,22 @@ def bshipcreate(size, x, y, done):
     x -= 1
     y -= 1
     global initx, inity, count, beginning
-    if count < size and not done:
-        print("test" + str(count))
-        if initx > -1 and inity > -1:
-            if (x == initx - 1 or x == initx + 1 or x == initx) and (y == inity - 1 or y == inity + 1 or y == inity):
-                initx = x
-                inity = y
-                arrStr[inity][initx] = 'o'
-                count += 1
-            else:
-                initx = -2
-                inity = -2
-        else:
+    if count < size:
+      if initx > -1 and inity > -1:
+          if (x == initx - 1 and y == inity) or (x == initx  and y == inity + 1) or (x == initx + 1 and y == inity ) or (x == initx and y == inity - 1):
             initx = x
             inity = y
             arrStr[inity][initx] = 'o'
-            print("adding now" + str(count))
             count += 1
+          else:
+            initx = -2
+            inity = -2
+      else:
+          initx = x
+          inity = y
+          arrStr[inity][initx] = 'o'
+          print("adding now" + str(count))
+          count += 1
 
 
     if done:
